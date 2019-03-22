@@ -16,8 +16,8 @@ body
 .App
   text-align: center
   position: relative
-  min-height: 100vh
-  width: 100vw
+  min-height: 100%
+  width: 100%
   overflow-x: hidden
 
 .detailsViewWrapper
@@ -29,3 +29,14 @@ body
   left: 100%
   top: 0
   transition: transform 0.5s ease-out
+
+@media (min-width: 769px) and (orientation: landscape)
+  .detailsViewWrapper
+    left: initial
+    right: 0
+    width: 63%
+    margin-top: 45px
+    background: linear-gradient(#d5dff4, #c0d0f6)
+
+  .placeholderDesktop
+    color: #5F636B

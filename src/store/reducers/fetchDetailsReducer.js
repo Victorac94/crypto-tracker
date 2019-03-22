@@ -2,6 +2,7 @@ import * as actionTypes from '../actions/actionTypes';
 import { updateObject } from '../../shared/utility';
 
 const initialState = {
+  fetching: false,
   symbol: null,
   details: null,
   newDetails: false
@@ -9,12 +10,12 @@ const initialState = {
 
 // FETCHING DETAILS
 const fetchDetails = (state, action) => {
-  return updateObject(state, {symbol: null, details: null, newDetails: false})
+  return updateObject(state, {fetching: true, symbol: null, details: null, newDetails: false})
 };
 
 // FETCHING DETAILS SUCCEED
 const fetchDetailsSucceed = (state, action) => {
-  return updateObject(state, {symbol: action.symbol, details: action.data, newDetails: true})
+  return updateObject(state, {fetching: false, symbol: action.symbol, details: action.data, newDetails: true})
 };
 
 const fetchDetailsReducer = (state = initialState, action) => {

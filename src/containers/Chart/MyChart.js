@@ -38,7 +38,6 @@ class MyChart extends Component {
         u === "(Millions)" ? v / 1000000 :
         u === "(Billions)" ? v / 1000000000 : v
       })
-      console.log("inside IIFE " + u + result)
       return result;
     })(volSmallest)
 
