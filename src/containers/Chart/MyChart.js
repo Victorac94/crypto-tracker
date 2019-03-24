@@ -6,16 +6,16 @@ import * as classes from './MyChart.module.sass';
 
 class MyChart extends Component {
 
-  loadDataOnChart = details => {
+  loadDataOnChart = history => {
     let price;
     let volume;
     let volSmallest;
     let unit = null;
     let labels;
-    console.log(details);
+    console.log(history);
 
-    price = details.Data.map(c => c.close);
-    volume = details.Data.map(c => c.volumeto);
+    price = history.Data.map(c => c.close);
+    volume = history.Data.map(c => c.volumeto);
     volSmallest = [...volume];
     volSmallest = volSmallest.sort((a, b) => a - b)[0];
 
@@ -41,7 +41,7 @@ class MyChart extends Component {
       return result;
     })(volSmallest)
 
-    labels = details.Data.map(c => {
+    labels = history.Data.map(c => {
       const d = new Date(c.time*1000);
 
       return `${d.getDate()}/${d.getMonth() + 1}`;
@@ -112,7 +112,7 @@ class MyChart extends Component {
   }
 
   componentDidMount () {
-    this.loadDataOnChart(this.props.detailsReducer.details);
+    this.loadDataOnChart(this.props.coinHistoryReducer.history);
   }
 
   render () {
@@ -126,7 +126,7 @@ class MyChart extends Component {
 
 const mapStateToProps = state => {
   return {
-    detailsReducer: state.detailsReducer
+    coinHistoryReducer: state.coinHistoryReducer
   }
 }
 

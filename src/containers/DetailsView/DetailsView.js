@@ -9,8 +9,12 @@ import DetailsTitle from '../../components/DetailsTitle/DetailsTitle';
 class DetailsView extends Component {
   render () {
     let coin = null;
+    let fullDataR = this.props.coinFullDataReducer;
 
-    coin = this.props.topReducer.coins.find(c => c.CoinInfo.Name === this.props.detailsReducer.symbol);
+    coin = fullDataR.fullData.DISPLAY[fullDataR.symbol];
+
+    // coin = this.props.topReducer.coins.find(c => c.CoinInfo.Name === this.props.coinHistoryReducer.symbol)
+    //       || this.props.coinHistoryReducer.details.Data;
     console.log(coin);
 
     return (
@@ -18,9 +22,9 @@ class DetailsView extends Component {
         <div className={classes.goBackButton} onClick={this.props.hideDetails}>
           <img src={require("../../assets/Go Back.svg")} alt="go back icon" />
         </div>
-        <DetailsTitle details={coin.CoinInfo} />
-        <Chart details={this.props.detailsReducer.details}/>
-        <CoinDetails details={coin.DISPLAY}/>
+        <DetailsTitle fullData={coin} fullName={fullDataR.fullName}/>
+        <Chart history={this.props.coinHistoryReducer.history}/>
+        <CoinDetails details={coin.USD}/>
       </div>
     )
   }
@@ -28,8 +32,9 @@ class DetailsView extends Component {
 
 const mapStateToProps = state => {
   return {
-    detailsReducer: state.detailsReducer,
-    topReducer: state.topReducer
+    topReducer: state.topReducer,
+    coinHistoryReducer: state.coinHistoryReducer,
+    coinFullDataReducer: state.coinFullDataReducer
   }
 }
 

@@ -9,7 +9,8 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import fetchTopReducer from './store/reducers/fetchTopReducer';
-import fetchDetailsReducer from './store/reducers/fetchDetailsReducer';
+import coinHistoryReducer from './store/reducers/coinHistoryReducer';
+import coinFullDataReducer from './store/reducers/coinFullDataReducer';
 import generalReducer from './store/reducers/generalReducer';
 import { watchActions } from './store/sagas/index';
 
@@ -19,7 +20,8 @@ const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX
 
 const combinedReducers = combineReducers({
   topReducer: fetchTopReducer,
-  detailsReducer: fetchDetailsReducer,
+  coinHistoryReducer: coinHistoryReducer,
+  coinFullDataReducer: coinFullDataReducer,
   generalReducer: generalReducer
 });
 

@@ -38,8 +38,59 @@ $menuBarsColor: white
   .bar3
     width: 80%
 
-@media (min-width: 768px) and (orientation: landscape)
+.desktopMenu
+  display: none
+
+@media (min-width: 1025px) and (orientation: landscape)
   .header
     height: 45px
     bottom: initial
     top: 0
+
+  .menuIcon
+    display: none
+
+  .desktopMenu
+    width: 220px
+    display: flex
+    .search form
+      display: flex
+      align-items: center
+    .search__input,
+    .search__button
+      display: inline-block
+      border: 0
+      padding: 5px
+      height: 27px
+    .search__input
+      width: 80%
+      border-radius: 5px 0 0 5px
+      margin: 0
+      color: #343434
+      outline: none
+    .search__button
+      width: 20%
+      border-radius: 0 5px 5px 0
+      background-color: white
+      img
+        height: 16px
+    .search__button:hover
+      cursor: pointer
+
+  .searchListWrapper
+    max-height: 200px
+    overflow: auto
+    position: absolute
+    top: 45px
+    right: 16px
+    background-color: white
+    color: #585858
+    border: 1px solid #c7ddf6
+    box-shadow: -2px 2px 4px #959595
+    p
+      border-bottom: 1px solid #c7ddf6
+      padding: 10px 5px
+      margin: 0
+    p:hover
+      cursor: pointer
+      background-color: #eaf4fc

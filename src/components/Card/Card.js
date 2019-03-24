@@ -20,7 +20,7 @@ const card = (props) => {
   }
 
   return (
-    <div className={classes.card} onClick={props.loadDetails} data-name={props.name}>
+    <div className={classes.card} onClick={props.loadDetails} data-symbol={props.symbol} data-full_name={props.fullName}>
       <span className={classes.currencyIconNameWrapper}>
         <span className={classes.currencyIcon}>
           <img src={`https://www.cryptocompare.com/${props.imgUrl}`} alt={props.fullName}/>
