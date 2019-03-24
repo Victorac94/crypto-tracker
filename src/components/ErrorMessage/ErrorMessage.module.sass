@@ -1,10 +1,21 @@
 .errorMessageBox
   width: 90%
-  margin: 0 auto
-  border: 1px solid #e72d2d
+  margin: 20px auto
+  border: 1px solid #e45454
   border-radius: 5px
-  background-color: #fe9f9f
+  background: linear-gradient(90deg, #fc4a4a, #ff2c25, #ff2701, #fc4a4a)
+  background-size: 200% 200%
+  font-size: 17px
   display: flex
   justify-content: center
   align-items: center
-  color: #1f1f1f
+  color: white
+  animation: errorAnimation 2s linear infinite forwards
+
+@keyframes errorAnimation
+    0%
+      background-position: 200% 50%
+    50%
+      background-position: 100% 50%
+    100%
+      background-position: 0% 50%

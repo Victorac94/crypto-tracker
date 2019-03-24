@@ -24,6 +24,7 @@ class App extends Component {
 constructor(props) {
   super(props);
   this.state = {
+    showingMenu: false,
     showingDetails: false,
     shouldRenderDetails: false,
     searchListCoins: null
@@ -37,14 +38,10 @@ onSearch = (e) => {
   let result = null;
 
   e.preventDefault();
-  console.log(value);
 
   if (value) result = searcher.search(value);
 
   this.setState(() => {return {searchListCoins: result}})
-
-  console.log(result);
-
 }
 
 loadDetails = (e, fromSearch) => {
@@ -62,7 +59,7 @@ loadDetails = (e, fromSearch) => {
   if (fromSearch) {
     this.setState(() => {return {searchListCoins: null}})
   }
-console.log(e.currentTarget.dataset);
+
   this.showingDetailsTrue();
   this.props.onFetchCoinFullData(symbol, full_name);
   this.props.onFetchCoinHistoryDay(symbol);
@@ -83,6 +80,30 @@ hideDetails = () => {
 
   document.documentElement.scrollTop = document.body.scrollTop = this.props.generalReducer.scroll;
   this.showingDetailsFalse();
+}
+
+showMobileMenu = () => {
+  this.setState(prevState => {
+    return {
+      showingMenu: true
+    }
+  });
+}
+
+hideMobileMenu = () => {
+  this.setState(prevState => {
+    return {
+      showingMenu: false
+    }
+  });
+}
+
+clearSearchList = () => {
+  this.setState(prevState => {
+    return {
+      searchListCoins: null
+    }
+  })
 }
 
 getWinWidth = () => {
@@ -175,7 +196,7 @@ componentDidMount() {
 
     // If there was an error fetching Top coins data
     if (this.props.topReducer.error) {
-      showList = <ErrorMessage error={this.props.generalReducer.error}/>;
+      showList = <ErrorMessage error={this.props.topReducer.error}/>;
     }
     // Else if there's no error and we have fetched Top Coins data
     else if (this.props.topReducer.coins) {
@@ -192,14 +213,23 @@ componentDidMount() {
             price={c[2]}
             imgUrl={c[3]}
             changePct24Hour={c[4]}
-            key={c[0]}/>
+            key={c[0]}
+            hideMobileMenu={this.hideMobileMenu}/>
         )
       })
 
     showList = <CurrenciesList currencies={myCards}/>;
     }
 
-    if (fetching || (newHistory && !this.state.shouldRenderDetails)) {
+    if (this.props.generalReducer.error) {
+      detailsSection = (
+        <React.Fragment>
+          <ErrorMessage error={this.props.generalReducer.error}/>
+          <p onClick={this.hideDetails} style={{color: "#216cec"}}>Go back</p>
+        </React.Fragment>
+      );
+    }
+    else if (fetching || (newHistory && !this.state.shouldRenderDetails)) {
       detailsSection = <div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
     } else if (newHistory && symbol && this.state.shouldRenderDetails) {
       detailsSection = (
@@ -210,6 +240,8 @@ componentDidMount() {
       )
     } else if (this.winWidth > 768) {
       detailsSection = <h2 className={classes.placeholderDesktop}>Please select a currency...</h2>
+    } else if (this.props.generalReducer.error) {
+      detailsSection = <ErrorMessage error={this.props.generalReducer.error}/>;
     }
 
     return (
@@ -222,7 +254,11 @@ componentDidMount() {
         <Header
           onSearch={(e) => this.onSearch(e)}
           searchList={this.state.searchListCoins}
-          fetchCoinFullData={e => this.loadDetails(e, true)}/>
+          fetchCoinFullData={e => this.loadDetails(e, true)}
+          showingMenu={this.state.showingMenu}
+          showMobileMenu={this.showMobileMenu}
+          hideMobileMenu={this.hideMobileMenu}
+          clearSearchList={this.clearSearchList}/>
       </div>
     );
   }

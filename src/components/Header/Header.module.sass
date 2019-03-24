@@ -13,6 +13,7 @@ $menuBarsColor: white
   width: 100%
   height: 55px
   padding-left: 20px
+  z-index: 100
   h2
     display: inline-block
     font-size: 1.4rem
@@ -36,10 +37,98 @@ $menuBarsColor: white
   .bar2
     width: 65%
   .bar3
+    width: 85%
+
+.menuCloseIcon
+  width: 35px
+  height: 28px
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+  .bar1,
+  .bar2
+    display: inline-block
+    width: 100%
+    height: 0
+    background-color: white
+    border: 2px solid $menuBarsColor
+    border-radius: 3px
+    transform-origin: left
+  .bar1
+    transform: rotateZ(45deg)
+  .bar2
+    transform: rotateZ(-45deg)
+
+.desktopMenu,
+.mobileMenu
+  width: 220px
+  display: flex
+  .search form
+    display: flex
+    align-items: center
+  .search__input,
+  .search__button
+    display: inline-block
+    border: 0
+    padding: 5px
+    height: 27px
+  .search__input
     width: 80%
+    border-radius: 5px 0 0 5px
+    margin: 0
+    color: #343434
+    outline: none
+  .search__button
+    width: 20%
+    border-radius: 0 5px 5px 0
+    background-color: white
+    img
+      height: 16px
+  .search__button:hover
+    cursor: pointer
+
+.mobileMenu
+  display: flex
+  align-items: center
+  justify-content: space-between
+  position: absolute
+  bottom: 0
+  left: 100%
+  width: 100%
+  height: 55px
+  padding: 10px 15px
+  background: linear-gradient(45deg, #1d7adb, #1d5ddb)
+  transition: transform 0.35s ease-out
+  z-index: 1
+
+.showMobMenu
+  transform: translatex(-100%)
 
 .desktopMenu
   display: none
+
+.searchListWrapper
+  width: 100%
+  max-height: 200px
+  overflow: auto
+  position: fixed
+  top: -7px
+  right: 0
+  background-color: white
+  color: #585858
+  border: 1px solid #c7ddf6
+  box-shadow: -2px 2px 4px #959595
+  p
+    border-bottom: 1px solid #c7ddf6
+    padding: 10px 5px
+    margin: 0
+  p:hover
+    cursor: pointer
+    background-color: #eaf4fc
+  h4
+    background: #E9F0FF
+    margin: 0
+    padding: 17px 10px 10px 10px
 
 @media (min-width: 1025px) and (orientation: landscape)
   .header
@@ -50,47 +139,13 @@ $menuBarsColor: white
   .menuIcon
     display: none
 
+  .mobileMenu
+    display: none
+
   .desktopMenu
-    width: 220px
     display: flex
-    .search form
-      display: flex
-      align-items: center
-    .search__input,
-    .search__button
-      display: inline-block
-      border: 0
-      padding: 5px
-      height: 27px
-    .search__input
-      width: 80%
-      border-radius: 5px 0 0 5px
-      margin: 0
-      color: #343434
-      outline: none
-    .search__button
-      width: 20%
-      border-radius: 0 5px 5px 0
-      background-color: white
-      img
-        height: 16px
-    .search__button:hover
-      cursor: pointer
 
   .searchListWrapper
-    max-height: 200px
-    overflow: auto
-    position: absolute
+    width: auto
     top: 45px
     right: 16px
-    background-color: white
-    color: #585858
-    border: 1px solid #c7ddf6
-    box-shadow: -2px 2px 4px #959595
-    p
-      border-bottom: 1px solid #c7ddf6
-      padding: 10px 5px
-      margin: 0
-    p:hover
-      cursor: pointer
-      background-color: #eaf4fc

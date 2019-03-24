@@ -11,10 +11,10 @@ class DetailsView extends Component {
     let coin = null;
     let fullDataR = this.props.coinFullDataReducer;
 
-    coin = fullDataR.fullData.DISPLAY[fullDataR.symbol];
+    if (fullDataR.fullData) {
+      coin = fullDataR.fullData.DISPLAY[fullDataR.symbol];
+    }
 
-    // coin = this.props.topReducer.coins.find(c => c.CoinInfo.Name === this.props.coinHistoryReducer.symbol)
-    //       || this.props.coinHistoryReducer.details.Data;
     console.log(coin);
 
     return (
