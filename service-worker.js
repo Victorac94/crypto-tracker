@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/crypto-tracker/precache-manifest.b4092389350bf0b1db07d63863a67f25.js"
+  "/crypto-tracker/precache-manifest.5bbb04f5c171624be8fe86ff91ba9d8f.js"
 );
 
 workbox.clientsClaim();
