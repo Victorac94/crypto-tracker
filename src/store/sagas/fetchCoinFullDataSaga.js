@@ -3,6 +3,7 @@ import { put } from 'redux-saga/effects'
 
 import * as actionTypes from '../actions/actionTypes';
 import { fetchCoinFullDataSucceed } from '../actions/fetchCoinFullDataActions';
+import { clearError } from '../actions/generalActions';
 
 export function* fetchCoinFullDataSaga (payload) {
   try {
@@ -10,6 +11,7 @@ export function* fetchCoinFullDataSaga (payload) {
     console.log(response);
 
     yield put(fetchCoinFullDataSucceed(response.data, payload.symbol, payload.fullName))
+    yield put(clearError());
   } catch {
     console.log("There was an error fetching coin's full data");
   }

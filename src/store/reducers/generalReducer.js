@@ -11,6 +11,10 @@ const fetchFailed = (state, action) => {
   return updateObject(state, {error: action.error});
 };
 
+const clearError = (state, action) => {
+  return updateObject(state, {error: null});
+}
+
 // GET DOCUMENT SCROLL POSITION
 const saveScrollPosition = (state, action) => {
   return updateObject(state, {scroll: action.scroll})
@@ -19,6 +23,7 @@ const saveScrollPosition = (state, action) => {
 const generalReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.FETCH_FAILED: return fetchFailed(state, action);
+    case actionTypes.CLEAR_ERROR: return clearError(state, action);
     case actionTypes.SAVE_SCROLL_POSITION: return saveScrollPosition(state, action);
     default: return state;
   }

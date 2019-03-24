@@ -8,6 +8,12 @@ export const fetchFailed = (error) => {
   }
 }
 
+export const clearError = () => {
+  return {
+    type: actionTypes.CLEAR_ERROR
+  }
+}
+
 // GET DOCUMENT SCROLL POSITION
 export const saveScrollPosition = scroll => {
   return {
