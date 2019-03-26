@@ -22,9 +22,9 @@ class DetailsView extends Component {
         <div className={classes.goBackButton} onClick={this.props.hideDetails}>
           <img src={require("../../assets/Go Back.svg")} alt="go back icon" />
         </div>
-        <DetailsTitle fullData={coin} fullName={fullDataR.fullName}/>
+        {coin ? <DetailsTitle fullData={coin} fullName={fullDataR.fullName}/> : null}
         <Chart history={this.props.coinHistoryReducer.history}/>
-        <CoinDetails details={coin.USD}/>
+        {coin ? <CoinDetails details={coin.USD}/> : null}
       </div>
     )
   }

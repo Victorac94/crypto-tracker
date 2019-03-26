@@ -140,7 +140,7 @@ componentDidMount() {
 
   detailsView.classList.add("transition");
 
-  this.props.onFetchTopVolume24();
+  this.props.onFetchTopVolume24(10);
   this.getWinWidth();
 
   // window.addEventListener("resize", () => {
@@ -218,7 +218,12 @@ componentDidMount() {
         )
       })
 
-    showList = <CurrenciesList currencies={myCards}/>;
+    showList = (
+      <CurrenciesList
+        currencies={myCards}
+        fetchMoreTop={() => this.props.onFetchTopVolume24(this.props.topReducer.coins.length + 10)}
+        listLength={this.props.topReducer.coins.length}/>
+    );
     }
 
     if (this.props.generalReducer.error) {
@@ -246,7 +251,7 @@ componentDidMount() {
 
     return (
       <div className={classes.App}>
-        <MainTitle title="Top List by Volume 24h"/>
+        <MainTitle title="Top 40 by Volume 24h"/>
         {showList ? showList : <div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>}
         <div id="detailsViewWrapper" className={classes.detailsViewWrapper}>
           {detailsSection}
@@ -274,7 +279,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onFetchTopVolume24: () => dispatch(fetchDataActions.fetchTopVolume24()),
+    onFetchTopVolume24: (quantity) => dispatch(fetchDataActions.fetchTopVolume24(quantity)),
     onFetchCoinHistoryDay: symbol => dispatch(fetchCoinHistoryActions.fetchCoinHistoryDay(symbol)),
     onFetchCoinFullData: (symbol, fullName) => dispatch(fetchCoinFullDataActions.fetchCoinFullData(symbol, fullName)),
     onSaveScrollPosition: scroll => dispatch(generalActions.saveScrollPosition(scroll))

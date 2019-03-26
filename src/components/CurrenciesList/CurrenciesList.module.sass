@@ -7,10 +7,25 @@ $lightBlueGradBG: linear-gradient(#E9F0FF, #D4E1FF)
   flex-direction: column
   align-items: center
 
+.loadMoreButton
+  margin: 10px 0
+  padding: 12px 25px
+  color: #3B83FF
+  border: 1px solid #3B83FF
+  border-radius: 5px
+  font-size: 17px
+  transition: all 0.2s ease-out
+
+.loadMoreButton:hover
+  cursor: pointer
+  background: #3B83FF
+  color: white
+
 @media (min-width: 1025px) and (orientation: landscape)
   .list
     width: 37%
     margin-bottom: 0
 
-  // .listWrapper
-  //   height: calc(100vh - 45px)
+  .listWrapper
+    max-height: calc(100vh - 110px)
+    overflow: auto

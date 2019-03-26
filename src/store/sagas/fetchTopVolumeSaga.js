@@ -7,9 +7,9 @@ import { fetchFailed } from '../actions/generalActions';
 
 // TOP VOLUME IN 24H
 
-export function* fetchTopVolume24() {
+export function* fetchTopVolume24(payload) {
   try {
-    const response = yield axios.get("https://min-api.cryptocompare.com/data/top/totalvolfull?limit=20&tsym=USD&api_key=e98be82d42b0a4b4e34ab29d5dd0d79c809603e21cebcdb5c920610b6d4ce155");
+    const response = yield axios.get(`https://min-api.cryptocompare.com/data/top/totalvolfull?limit=${payload.quantity}&tsym=USD&api_key=e98be82d42b0a4b4e34ab29d5dd0d79c809603e21cebcdb5c920610b6d4ce155`);
     console.log(response);
 
     if (response.data.Response === "Error") {
